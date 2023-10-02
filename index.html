@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Calorias e Macronutrientes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            background-color: #3498db;
+            color: #ffffff;
+            padding: 20px;
+            margin: 0;
+        }
+        #container {
+            background-color: #ffffff;
+            margin: 20px auto;
+            padding: 20px;
+            width: 80%;
+            max-width: 800px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        label {
+            font-weight: bold;
+        }
+        select, input, button {
+            padding: 10px;
+            margin: 10px 0;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: #ffffff;
+        }
+        #relatorio {
+            text-align: left;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        #caloriasTotais, #proteinasTotais, #gordurasTotais, #carboidratosTotais {
+            font-size: 24px;
+            font-weight: bold;
+            color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculadora de Calorias e Macronutrientes</h1>
+
+    <div id="container">
+        <label for="alimento">Selecione um alimento:</label>
+        <select id="alimento">
+            <option value="abacate">Abacate</option>
+            <option value="abobrinha">Abobrinha</option>
+            <option value="arroz">Arroz</option>
+            <option value="atum">Atum</option>
+            <option value="banana">Banana</option>
+            <option value="batata">Batata</option>
+            <option value="brocolis">Brócolis</option>
+            <option value="carne">Carne</option>
+            <option value="cenoura">Cenoura</option>
+            <option value="couve">Couve</option>
+            <option value="frango">Frango</option>
+            <option value="iogurte">Iogurte</option>
+            <option value="maca">Maçã</option>
+            <option value="massa">Massa</option>
+            <option value="morango">Morango</option>
+            <option value="ovo">Ovo</option>
+            <option value="pao">Pão</option>
+            <option value="peixe">Peixe</option>
+            <option value="queijo">Queijo</option>
+        </select>
+        <label for="quantidade">Quantidade (em gramas):</label>
+        <input type="number" id="quantidade" placeholder="Digite a quantidade em gramas" />
+        <button onclick="calcularCalorias()">Adicionar Calorias</button>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Alimento</th>
+                    <th>Proteínas (g)</th>
+                    <th>Gorduras (g)</th>
+                    <th>Carboidratos (g)</th>
+                    <th>Calorias</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="infoNutricionais">
+                    <td>Selecionado</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0</td>
+                    <td>0 cal</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div id="relatorio">
+            <h2>Relatório de Calorias e Macronutrientes:</h2>
+            <p>Total de Calorias: <span id="caloriasTotais">0</span> cal</p>
+            <p>Total de Proteínas: <span id="proteinasTotais">0g</span></p>
+            <p>Total de Gorduras: <span id="gordurasTotais">0g</span></p>
+            <p>Total de Carboidratos: <span id="carboidratosTotais">0g</span></p>
+        </div>
+        <button onclick="reiniciar()">Reiniciar</button>
+    </div>
+
+    <script>
+        function calcularCalorias() {
+            const alimentoSelecionado = document.getElementById("alimento").value;
+            const quantidade = parseFloat(document.getElementById("quantidade").value);
+            const infoNutricionais = document.getElementById("infoNutricionais");
+            let calorias = 0;
+            let proteinas = 0;
+            let gorduras = 0;
+            let carboidratos = 0;
+
+            switch (alimentoSelecionado) {
+                case "abacate":
+                    calorias = 160 * (quantidade / 100); // Calorias de abacate
+                    proteinas = 2 * (quantidade / 100);
+                    gorduras = 14.7 * (quantidade / 100);
+                    carboidratos = 8.5 * (quantidade / 100);
+                    break;
+                case "abobrinha":
+                    calorias = 17 * (quantidade / 100); // Calorias de abobrinha
+                    proteinas = 0.6 * (quantidade / 100);
+                    gorduras = 0.3 * (quantidade / 100);
+                    carboidratos = 3.1 * (quantidade / 100);
+                    break;
+                case "arroz":
+                    calorias = 130 * (quantidade / 100); // Calorias de arroz
+                    proteinas = 2.2 * (quantidade / 100);
+                    gorduras = 0.2 * (quantidade / 100);
+                    carboidratos = 28.2 * (quantidade / 100);
+                    break;
+                case "atum":
+                    calorias = 116 * (quantidade / 100); // Calorias de atum
+                    proteinas = 26 * (quantidade / 100);
+                    gorduras = 8 * (quantidade / 100);
+                    carboidratos = 0;
+                    break;
+                case "banana":
+                    calorias = 89 * (quantidade / 100); // Calorias de banana
+                    proteinas = 1.1 * (quantidade / 100);
+                    gorduras = 0.3 * (quantidade / 100);
+                    carboidratos = 22 * (quantidade / 100);
+                    break;
+                case "batata":
+                    calorias = 77 * (quantidade / 100); // Calorias de batata
+                    proteinas = 2.0 * (quantidade / 100);
+                    gorduras = 0.2 * (quantidade / 100);
+                    carboidratos = 17.5 * (quantidade / 100);
+                    break;
+                case "brocolis":
+                    calorias = 34 * (quantidade / 100); // Calorias de brócolis
+                    proteinas = 2.8 * (quantidade / 100);
+                    gorduras = 0.6 * (quantidade / 100);
+                    carboidratos = 5.2 * (quantidade / 100);
+                    break;
+                case "carne":
+                    calorias = 250 * (quantidade / 100); // Calorias de carne
+                    proteinas = 25.7 * (quantidade / 100);
+                    gorduras = 20 * (quantidade / 100);
+                    carboidratos = 0;
+                    break;
+                case "cenoura":
+                    calorias = 41 * (quantidade / 100); // Calorias de cenoura
+                    proteinas = 0.6 * (quantidade / 100);
+                    gorduras = 0.3 * (quantidade / 100);
+                    carboidratos = 9.6 * (quantidade / 100);
+                    break;
+                case "couve":
+                    calorias = 49 * (quantidade / 100); // Calorias de couve
+                    proteinas = 1.5 * (quantidade / 100);
+                    gorduras = 0.2 * (quantidade / 100);
+                    carboidratos = 3.7 * (quantidade / 100);
+                    break;
+                case "frango":
+                    calorias = 165 * (quantidade / 100); // Calorias de frango
+                    proteinas = 31 * (quantidade / 100);
+                    gorduras = 3.6 * (quantidade / 100);
+                    carboidratos = 0;
+                    break;
+                case "iogurte":
+                    calorias = 61 * (quantidade / 100); // Calorias de iogurte
+                    proteinas = 3.5 * (quantidade / 100);
+                    gorduras = 3.3 * (quantidade / 100);
+                    carboidratos = 4.8 * (quantidade / 100);
+                    break;
+                case "maca":
+                    calorias = 52 * (quantidade / 100); // Calorias de maçã
+                    proteinas = 0.4 * (quantidade / 100);
+                    gorduras = 0.4 * (quantidade / 100);
+                    carboidratos = 14 * (quantidade / 100);
+                    break;
+                case "massa":
+                    calorias = 158 * (quantidade / 100); // Calorias de massa
+                    proteinas = 12.6 * (quantidade / 100);
+                    gorduras = 1.5 * (quantidade / 100);
+                    carboidratos = 74.5 * (quantidade / 100);
+                    break;
+                case "morango":
+                    calorias = 32 * (quantidade / 100); // Calorias de morango
+                    proteinas = 0.8 * (quantidade / 100);
+                    gorduras = 0.4 * (quantidade / 100);
+                    carboidratos = 7.7 * (quantidade / 100);
+                    break;
+                case "ovo":
+                    calorias = 155 * (quantidade / 100); // Calorias de ovo
+                    proteinas = 13 * (quantidade / 100);
+                    gorduras = 11 * (quantidade / 100);
+                    carboidratos = 1.1 * (quantidade / 100);
+                    break;
+                case "pao":
+                    calorias = 265 * (quantidade / 100); // Calorias de pão
+                    proteinas = 9 * (quantidade / 100);
+                    gorduras = 4.5 * (quantidade / 100);
+                    carboidratos = 50 * (quantidade / 100);
+                    break;
+                case "peixe":
+                    calorias = 105 * (quantidade / 100); // Calorias de peixe
+                    proteinas = 20.4 * (quantidade / 100);
+                    gorduras = 5.1 * (quantidade / 100);
+                    carboidratos = 0;
+                    break;
+                case "queijo":
+                    calorias = 402 * (quantidade / 100); // Calorias de queijo
+                    proteinas = 25 * (quantidade / 100);
+                    gorduras = 33 * (quantidade / 100);
+                    carboidratos = 1.3 * (quantidade / 100);
+                    break;
+                default:
+                    calorias = 0;
+                    proteinas = 0;
+                    gorduras = 0;
+                    carboidratos = 0;
+                    break;
+            }
+
+            document.getElementById("infoNutricionais").innerHTML = `
+                <td>${alimentoSelecionado}</td>
+                <td>${proteinas.toFixed(2)}</td>
+                <td>${gorduras.toFixed(2)}</td>
+                <td>${carboidratos.toFixed(2)}</td>
+                <td>${calorias.toFixed(2)} cal</td>
+            `;
+
+            const caloriasAtuais = parseFloat(document.getElementById("caloriasTotais").textContent);
+            const caloriasTotais = caloriasAtuais + calorias;
+            document.getElementById("caloriasTotais").textContent = caloriasTotais.toFixed(2);
+
+            const proteinasAtuais = parseFloat(document.getElementById("proteinasTotais").textContent);
+            const proteinasTotais = proteinasAtuais + proteinas;
+            document.getElementById("proteinasTotais").textContent = proteinasTotais.toFixed(2);
+
+            const gordurasAtuais = parseFloat(document.getElementById("gordurasTotais").textContent);
+            const gordurasTotais = gordurasAtuais + gorduras;
+            document.getElementById("gordurasTotais").textContent = gordurasTotais.toFixed(2);
+
+            const carboidratosAtuais = parseFloat(document.getElementById("carboidratosTotais").textContent);
+            const carboidratosTotais = carboidratosAtuais + carboidratos;
+            document.getElementById("carboidratosTotais").textContent = carboidratosTotais.toFixed(2);
+        }
+
+        function reiniciar() {
+            document.getElementById("caloriasTotais").textContent = "0";
+            document.getElementById("proteinasTotais").textContent = "0g";
+            document.getElementById("gordurasTotais").textContent = "0g";
+            document.getElementById("carboidratosTotais").textContent = "0g";
+            document.getElementById("infoNutricionais").innerHTML = `
+                <td>Selecionado</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0 cal</td>
+            `;
+        }
+    </script>
+</body>
+</html>
